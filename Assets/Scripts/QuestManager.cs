@@ -34,17 +34,44 @@ public class QuestManager : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
     }
     void Start()
     {
-        currentQuest = quests[0];
+        StartQuest(0);
     }
 
-    void Update()
+    public void StartQuest(int questIndex)
     {
-        
+        currentQuest = quests[questIndex];
+        ActivateInteractables(currentQuest);
     }
+
+    void ActivateInteractables(Quest quest)
+    {
+        foreach (var interactable in quest.interactables)
+        {
+            var obj = GameObject.Find(interactable.objectName);
+            if (obj != null)
+            {
+                var renderer = obj.GetComponent<Renderer>();
+                if (renderer != null)
+                {
+                    renderer.material.color = interactable.activeColor;
+                }
+                var collider = obj.GetComponent<Collider>();
+                if (collider != null)
+                {
+                    collider.enabled = true;
+                }
+            }
+        }
+    }
+
+
 
     // void InvokeInteractablesEvents(Quest quest)
     // {
