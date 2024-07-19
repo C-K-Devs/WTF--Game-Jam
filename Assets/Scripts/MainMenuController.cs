@@ -7,6 +7,8 @@ using UnityEditor;
 
 public class MainMenuController : MonoBehaviour
 {
+    public GameObject buttonPanel;
+    public GameObject settingsPanel;
     public void PlayGame()
     {
         SceneManager.LoadScene("GameScene");
@@ -14,7 +16,14 @@ public class MainMenuController : MonoBehaviour
 
     public void OpenSettings()
     {
-        // Implement settings functionality here
+        buttonPanel.SetActive(false);
+        settingsPanel.SetActive(true);
+    }
+
+    public void Back()
+    {
+        settingsPanel.SetActive(false);
+        buttonPanel.SetActive(true);
     }
 
     public void QuitGame()
@@ -25,4 +34,6 @@ public class MainMenuController : MonoBehaviour
         Application.Quit();
         #endif
     }
+
+    //volume slider need to be implemented that controlls master volume
 }
