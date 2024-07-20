@@ -22,6 +22,7 @@ public class Quest{
 [Serializable]
 public class Interactables{
     public string objectName;
+    public GameObject obj;
     public bool isInteractable = false;
     public Color disabledColor = Color.white;
     public Color activeColor = Color.green;
@@ -63,6 +64,9 @@ public class QuestManager : MonoBehaviour
 
     public void StartQuest(int questIndex)
     {
+        if (questIndex > 0){
+            DeactivateInteractables(quests[questIndex - 1]);
+        }
         currentQuest = quests[questIndex].questName;
         ActivateInteractables(quests[questIndex]);
     }
@@ -71,24 +75,30 @@ public class QuestManager : MonoBehaviour
     {
         foreach (var interactable in quest.interactables)
         {
-            var obj = GameObject.Find(interactable.objectName);
-            if (obj != null)
+            if (interactable.obj != null)
             {
-                var renderer = obj.GetComponent<Renderer>();
-                if (renderer != null)
-                {
+                if (interactable.obj.TryGetComponent<Renderer>(out Renderer renderer)){
                     renderer.material.color = interactable.activeColor;
-                }
-                var collider = obj.GetComponent<Collider>();
-                if (collider != null)
-                {
-                    collider.enabled = true;
                 }
                 interactable.isInteractable = true;
             }
         }
     }
 
+    void DeactivateInteractables(Quest quest)
+    {
+        foreach (var interactable in quest.interactables)
+        {
+            if (interactable.obj != null)
+            {
+                if (interactable.obj.TryGetComponent<Renderer>(out Renderer renderer))
+                {
+                    renderer.material.color = interactable.disabledColor;
+                }
+                interactable.isInteractable = true;
+            }
+        }
+    }
 
 
     // void InvokeInteractablesEvents(Quest quest)

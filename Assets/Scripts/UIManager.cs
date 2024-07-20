@@ -25,7 +25,9 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void ShowSubtitle(string sub, float duration){
+    public void ShowSubtitle(string sub, float duration)
+    {
+        StopShowSubtitle();
         subtitle.text = sub;
         subtitleDuration = duration;
         StartCoroutine(SubtitleCoroutine(subtitleDuration));
