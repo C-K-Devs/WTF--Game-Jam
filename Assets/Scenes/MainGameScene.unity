@@ -382,7 +382,6 @@ GameObject:
   - component: {fileID: 147894318}
   - component: {fileID: 147894317}
   - component: {fileID: 147894316}
-  - component: {fileID: 147894315}
   - component: {fileID: 147894314}
   m_Layer: 0
   m_Name: Drawer (2)
@@ -418,33 +417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f05bb8bce2a22444f88bce80d6d40545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &147894315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 147894312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6e8296d4f996b549a0036cfe4479202, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 553088536}
-        m_TargetAssemblyTypeName: Drawer, Assembly-CSharp
-        m_MethodName: OpenDrawer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!65 &147894316
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -735,7 +707,6 @@ GameObject:
   - component: {fileID: 553088540}
   - component: {fileID: 553088539}
   - component: {fileID: 553088538}
-  - component: {fileID: 553088537}
   - component: {fileID: 553088536}
   m_Layer: 0
   m_Name: Drawer
@@ -756,33 +727,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f05bb8bce2a22444f88bce80d6d40545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &553088537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 553088535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6e8296d4f996b549a0036cfe4479202, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 553088536}
-        m_TargetAssemblyTypeName: Drawer, Assembly-CSharp
-        m_MethodName: OpenDrawer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!65 &553088538
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -978,13 +922,13 @@ MonoBehaviour:
       onInteractedEvent:
         m_PersistentCalls:
           m_Calls:
-          - m_Target: {fileID: 0}
-            m_TargetAssemblyTypeName: 
-            m_MethodName: 
-            m_Mode: 0
+          - m_Target: {fileID: 553088536}
+            m_TargetAssemblyTypeName: Drawer, Assembly-CSharp
+            m_MethodName: OpenDrawer
+            m_Mode: 1
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: 
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
               m_IntArgument: 0
               m_FloatArgument: 0
               m_StringArgument: 
@@ -995,25 +939,73 @@ MonoBehaviour:
       activeColor: {r: 0.4584905, g: 1, b: 0.5183031, a: 0}
       onInteractedEvent:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 1519800821}
+            m_TargetAssemblyTypeName: Drawer, Assembly-CSharp
+            m_MethodName: OpenDrawer
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
     - objectName: Drawer (2)
       disabledColor: {r: 0.6301887, g: 0.6301887, b: 0.6301887, a: 0}
       activeColor: {r: 0.4584905, g: 1, b: 0.5183031, a: 0}
       onInteractedEvent:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 147894314}
+            m_TargetAssemblyTypeName: Drawer, Assembly-CSharp
+            m_MethodName: OpenDrawer
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
     - objectName: CircuitBox
       disabledColor: {r: 0.6301887, g: 0.6301887, b: 0.6301887, a: 0}
       activeColor: {r: 0.4584905, g: 1, b: 0.5183031, a: 0}
       onInteractedEvent:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 1840653613}
+            m_TargetAssemblyTypeName: CircuitBox, Assembly-CSharp
+            m_MethodName: OpenCircuitBox
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
     - objectName: Switch
       disabledColor: {r: 0.6301887, g: 0.6301887, b: 0.6301887, a: 0}
       activeColor: {r: 0.4584905, g: 1, b: 0.5183031, a: 0}
       onInteractedEvent:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 1625987312}
+            m_TargetAssemblyTypeName: Switch, Assembly-CSharp
+            m_MethodName: ActivateSwitch
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
 --- !u!4 &1391196921
 Transform:
   m_ObjectHideFlags: 0
@@ -1132,7 +1124,6 @@ GameObject:
   - component: {fileID: 1519800825}
   - component: {fileID: 1519800824}
   - component: {fileID: 1519800823}
-  - component: {fileID: 1519800822}
   - component: {fileID: 1519800821}
   m_Layer: 0
   m_Name: Drawer (1)
@@ -1168,33 +1159,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f05bb8bce2a22444f88bce80d6d40545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1519800822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1519800819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6e8296d4f996b549a0036cfe4479202, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 553088536}
-        m_TargetAssemblyTypeName: Drawer, Assembly-CSharp
-        m_MethodName: OpenDrawer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!65 &1519800823
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1315,7 +1279,6 @@ GameObject:
   - component: {fileID: 1625987316}
   - component: {fileID: 1625987315}
   - component: {fileID: 1625987314}
-  - component: {fileID: 1625987313}
   - component: {fileID: 1625987312}
   m_Layer: 0
   m_Name: Switch
@@ -1351,33 +1314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7464c27d5b9f43a4b9878db050c33a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1625987313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625987310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6e8296d4f996b549a0036cfe4479202, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1625987312}
-        m_TargetAssemblyTypeName: Switch, Assembly-CSharp
-        m_MethodName: ActivateSwitch
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!65 &1625987314
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1658,7 +1594,6 @@ GameObject:
   - component: {fileID: 1840653617}
   - component: {fileID: 1840653616}
   - component: {fileID: 1840653615}
-  - component: {fileID: 1840653614}
   - component: {fileID: 1840653613}
   m_Layer: 0
   m_Name: CircuitBox
@@ -1694,33 +1629,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d480cae9fb39e047bb08cf2007f6d1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1840653614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840653611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6e8296d4f996b549a0036cfe4479202, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1840653613}
-        m_TargetAssemblyTypeName: CircuitBox, Assembly-CSharp
-        m_MethodName: OpenCircuitBox
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!65 &1840653615
 BoxCollider:
   m_ObjectHideFlags: 0
