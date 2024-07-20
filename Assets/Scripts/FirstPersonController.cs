@@ -14,15 +14,21 @@ public class FirstPersonController : MonoBehaviour
     private float smoothHorizontalLookRotation;
     public float rotationSmoothTime = 0.1f;
 
+    private float initialCameraY;
+    public float breathingAmplitude = 0.1f; // The amplitude of the breathing effect
+    public float breathingSpeed = 1f; // The speed of the breathing effect
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        initialCameraY = playerCamera.localPosition.y;
     }
 
     void Update()
     {
         Move();
         LookAround();
+        ApplyBreathingEffect();
     }
 
     void Move()
@@ -48,5 +54,13 @@ public class FirstPersonController : MonoBehaviour
 
         transform.localEulerAngles = new Vector3(0, smoothHorizontalLookRotation, 0);
         playerCamera.localEulerAngles = Vector3.right * smoothVerticalLookRotation;
+    }
+
+    void ApplyBreathingEffect()
+    {
+        float newY = initialCameraY + Mathf.Sin(Time.time * breathingSpeed) * breathingAmplitude;
+        Vector3 cameraPosition = playerCamera.localPosition;
+        cameraPosition.y = newY;
+        playerCamera.localPosition = cameraPosition;
     }
 }

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Switch : MonoBehaviour
+public class Switch : MonoBehaviour, IInteractable
 {
-    public void ActivateSwitch()
+    public int switchNo = 1;
+    public void Interact()
     {
-        // Logic to open the circuit box
-        Debug.Log("Switch flipped.");
+        Debug.Log("Switch" + switchNo + " flipped.");
     }
 }

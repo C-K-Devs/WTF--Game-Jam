@@ -29,8 +29,24 @@ public class Interactables{
 public class QuestManager : MonoBehaviour
 {
     public static QuestManager instance;
-    public Quest currentQuest;
+    public QuestName currentQuest;
     public List<Quest> quests;
+    public bool torchActivated = false;
+    public bool jumpScared_OpenDrawer = false;
+    public bool screwDriverFound = false;
+    public bool wiresMatched = false;
+    public bool mailChecked = false;
+    public bool cupboardKeyFound = false;
+    public bool cupboardOpened = false;
+    public bool phoneDead = false;
+    public bool umbrellaCollected = false;
+    public bool threePapersCollected = false;
+    public bool safeUnlocked = false;
+    public bool bunchOfKeysCollected = false;
+    public bool jumpScared_ClosedDrawer = false;
+    public bool masterKeyCollected = false;
+    public bool doorOpened = false;
+    
 
     void Awake()
     {
@@ -46,8 +62,8 @@ public class QuestManager : MonoBehaviour
 
     public void StartQuest(int questIndex)
     {
-        currentQuest = quests[questIndex];
-        ActivateInteractables(currentQuest);
+        currentQuest = quests[questIndex].questName;
+        ActivateInteractables(quests[questIndex]);
     }
 
     void ActivateInteractables(Quest quest)

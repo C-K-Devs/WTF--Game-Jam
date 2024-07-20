@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Drawer : MonoBehaviour
+public class Drawer : MonoBehaviour, IInteractable
 {
-    public void OpenDrawer()
+    public void Interact()
     {
-        // Logic to open the circuit box
         Debug.Log("Drawer opened.");
     }
 }
