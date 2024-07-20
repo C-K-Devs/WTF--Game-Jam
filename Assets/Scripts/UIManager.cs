@@ -6,42 +6,53 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
-    
-    public TMP_Text subtitle;
-    private float subtitleDuration = 5;
-    // Start is called before the first frame update
 
-    void Awake(){
+    public TMP_Text subtitle;
+    public bool isSubtitleActive = false;
+    private Coroutine currentSubtitleCoroutine;
+
+    void Awake()
+    {
         instance = this;
     }
-    void Start()
+
+    public void ShowSubtitle(string sub, float duration, bool force)
     {
-        
+        if (force)
+        {
+            if (currentSubtitleCoroutine != null)
+            {
+                StopCoroutine(currentSubtitleCoroutine);
+            }
+            currentSubtitleCoroutine = StartCoroutine(SubtitleCoroutine(sub, duration));
+        }
+        else
+        {
+            if (!isSubtitleActive)
+            {
+                currentSubtitleCoroutine = StartCoroutine(SubtitleCoroutine(sub, duration));
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator SubtitleCoroutine(string sub, float duration)
     {
-        
-    }
-
-    public void ShowSubtitle(string sub, float duration)
-    {
-        StopShowSubtitle();
+        isSubtitleActive = true;
         subtitle.text = sub;
-        subtitleDuration = duration;
-        StartCoroutine(SubtitleCoroutine(subtitleDuration));
-    }
-
-    private IEnumerator SubtitleCoroutine(float duration)
-    {
         subtitle.gameObject.SetActive(true);
         yield return new WaitForSeconds(duration);
         subtitle.gameObject.SetActive(false);
+        isSubtitleActive = false;
     }
 
-    public void StopShowSubtitle(){
-        StopCoroutine(SubtitleCoroutine(subtitleDuration));
+    public void StopShowSubtitle()
+    {
+        if (currentSubtitleCoroutine != null)
+        {
+            StopCoroutine(currentSubtitleCoroutine);
+            currentSubtitleCoroutine = null;
+        }
         subtitle.gameObject.SetActive(false);
+        isSubtitleActive = false;
     }
 }

@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         torch.SetActive(false);
-        UIManager.instance.ShowSubtitle("PRESS 'F' TO TURN ON THE TORCH", 99999f);
+        UIManager.instance.ShowSubtitle("PRESS 'F' TO TURN ON THE TORCH", 99999f, true);
     }
 
     void Update()
@@ -40,7 +40,6 @@ public class Player : MonoBehaviour
                     {
                         currentInteractable.Interact();
                         currentInteractable = null;
-                        UIManager.instance.StopShowSubtitle();
                     }
                     break;
                 case QuestName.Quest2:
@@ -64,7 +63,7 @@ public class Player : MonoBehaviour
                 if (currentInteractable != interactable)
                 {
                     currentInteractable = interactable;
-                    UIManager.instance.ShowSubtitle("PRESS 'F' TO INTERACT", 99999f);
+                    UIManager.instance.ShowSubtitle("PRESS 'F' TO INTERACT", 99999f, false);
                 }
             }
             else
