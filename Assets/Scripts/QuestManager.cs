@@ -22,8 +22,9 @@ public class Quest{
 [Serializable]
 public class Interactables{
     public string objectName;
-    public Color disabledColor;
-    public Color activeColor;
+    public bool isInteractable = false;
+    public Color disabledColor = Color.white;
+    public Color activeColor = Color.green;
     public UnityEvent onInteractedEvent;
 }
 public class QuestManager : MonoBehaviour
@@ -83,6 +84,7 @@ public class QuestManager : MonoBehaviour
                 {
                     collider.enabled = true;
                 }
+                interactable.isInteractable = true;
             }
         }
     }
