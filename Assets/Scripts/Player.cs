@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public GameObject torch;
     public IInteractable currentInteractable;
+    public bool isInteractable = false;
     public float interactRange = 5f;
 
     void Start()
@@ -43,8 +44,25 @@ public class Player : MonoBehaviour
                     }
                     break;
                 case QuestName.Quest2:
+                    if (currentInteractable != null){
+                        currentInteractable.Interact();
+                        currentInteractable = null;
+                    }
+                    break;
                 case QuestName.Quest3:
+                    if (currentInteractable != null)
+                    {
+                        currentInteractable.Interact();
+                        currentInteractable = null;
+                    }
+                    break;
                 case QuestName.Quest4:
+                    if (currentInteractable != null)
+                    {
+                        currentInteractable.Interact();
+                        currentInteractable = null;
+                    }
+                    break;
                 case QuestName.Quest5:
                     break;
             }
@@ -60,10 +78,24 @@ public class Player : MonoBehaviour
         {
             if (hit.collider.TryGetComponent<IInteractable>(out IInteractable interactable))
             {
-                if (currentInteractable != interactable)
+                Quest currentQuest = QuestManager.instance.quests.Find(q => q.questName == QuestManager.instance.currentQuest);
+                Interactables interactableEntry = currentQuest.interactables.Find(i => i.obj == hit.collider.gameObject);
+
+                if (interactableEntry != null && interactableEntry.isInteractable)
                 {
-                    currentInteractable = interactable;
-                    UIManager.instance.ShowSubtitle("PRESS 'F' TO INTERACT", 99999f, false);
+                    if (currentInteractable != interactable)
+                    {
+                        currentInteractable = interactable;
+                        UIManager.instance.ShowSubtitle("PRESS 'F' TO INTERACT", 99999f, false);
+                    }
+                }
+                else
+                {
+                    if (currentInteractable != null)
+                    {
+                        currentInteractable = null;
+                        UIManager.instance.StopShowSubtitle();
+                    }
                 }
             }
             else

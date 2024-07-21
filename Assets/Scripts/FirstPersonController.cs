@@ -26,8 +26,12 @@ public class FirstPersonController : MonoBehaviour
 
     void Update()
     {
-        Move();
-        LookAround();
+        if (QuestManager.instance.canMove){
+            Move();
+        }
+        if (QuestManager.instance.canLook){
+            LookAround();
+        }
         ApplyBreathingEffect();
     }
 
