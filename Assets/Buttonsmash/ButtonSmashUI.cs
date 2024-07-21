@@ -43,7 +43,7 @@ public class ButtonSmashUI : MonoBehaviour
                 UpdateCounterText();
             }
 
-            if (count >= 15)
+            if (count >= 15) //buttonsmash results & applications ....
             {
                 isCaseOpened = true;
                 counterText.text = "Case Opened";
@@ -77,7 +77,7 @@ public class ButtonSmashUI : MonoBehaviour
             if (holdTimer >= holdDuration)
             {
                 holdTimer = holdDuration; // Cap the hold timer at holdDuration
-                isScrewRemoved = true;
+                isScrewRemoved = true; // hold results & applications ....
                 holdText.text = "Screw Removed";
             }
             else
