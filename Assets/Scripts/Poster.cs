@@ -36,7 +36,7 @@ public class Poster : MonoBehaviour, IInteractable
         Vector3 targetPosition = cameraTransform.position + cameraTransform.forward * offsetFromCamera.z +
                                   cameraTransform.right * offsetFromCamera.x +
                                   cameraTransform.up * offsetFromCamera.y;
-        Quaternion targetRotation = Quaternion.Euler(-90,0,180);
+        Quaternion targetRotation = Quaternion.LookRotation(cameraTransform.position - targetPosition) * Quaternion.Euler(-90f, 0f, 0f);
 
         float elapsedTime = 0f;
 

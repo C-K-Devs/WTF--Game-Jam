@@ -6,50 +6,48 @@ public class Wire : MonoBehaviour
 {
     public SpriteRenderer wireEnd;
     public GameObject lightOn;
-    Vector3 startPoint;
-    Vector3 StartPosition;
+    private Vector3 startPoint;
+    private Vector3 startPosition;
+    public CircuitBox circuitBox;
+
 
     void Start()
     {
         startPoint = transform.parent.position;
-        StartPosition = transform.position;
+        startPosition = transform.position;
     }
 
     private void OnMouseDrag()
     {
-        Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        newPosition.z = 0;
+        Vector3 newPosition = GetMouseWorldPosition();
 
-        Collider2D [] colliders = Physics2D.OverlapCircleAll(newPosition, 0.2f);
-        foreach (Collider2D collider in colliders)
+        if (newPosition != Vector3.zero)
         {
-            if (collider.gameObject != gameObject)
+            UpdateWire(newPosition);
+
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
             {
-                UpdateWire(collider.transform.position);
-                if (transform.parent.name.Equals(collider.transform.parent.name))
+                Transform hitTransform = hit.transform;
+                Debug.Log(hitTransform.parent.name);
+                if (transform.parent.name.Equals(hitTransform.parent.name))
                 {
-                    collider.GetComponent<Wire>()?.Done();
                     Done();
                 }
-
-                return;
             }
         }
-
-        UpdateWire(newPosition);
     }
 
     void Done()
     {
         lightOn.SetActive(true);
-
+        circuitBox.WireMatched();
         Destroy(this);
-
     }
 
     private void OnMouseUp()
     {
-        UpdateWire(StartPosition);
+        UpdateWire(startPosition);
     }
 
     void UpdateWire(Vector3 newPosition)
@@ -59,7 +57,20 @@ public class Wire : MonoBehaviour
         Vector3 direction = newPosition - startPoint;
         transform.right = direction * transform.lossyScale.x;
 
-        float dist = Vector2.Distance(startPoint, newPosition);
+        float dist = Vector3.Distance(startPoint, newPosition);
         wireEnd.size = new Vector2(dist, wireEnd.size.y);
+    }
+
+    Vector3 GetMouseWorldPosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            return hit.point;
+        }
+
+        return Vector3.zero;
     }
 }

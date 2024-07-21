@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour
 {
     public float speed = 5f;
@@ -10,44 +11,45 @@ public class FirstPersonController : MonoBehaviour
 
     private float verticalLookRotation;
     private float horizontalLookRotation;
-    private float smoothVerticalLookRotation;
     private float smoothHorizontalLookRotation;
-    public float rotationSmoothTime = 0.1f;
-
-    private float initialCameraY;
-    public float breathingAmplitude = 0.1f; // The amplitude of the breathing effect
-    public float breathingSpeed = 1f; // The speed of the breathing effect
+    private float smoothVerticalLookRotation;
+    public float rotationSmoothTime = 10;
+    private CharacterController characterController;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        initialCameraY = playerCamera.localPosition.y;
+        characterController = GetComponent<CharacterController>();
     }
 
     void Update()
     {
-        if (QuestManager.instance.canMove){
+        if (QuestManager.instance.canMove)
+        {
             Move();
         }
-        if (QuestManager.instance.canLook){
+        if (QuestManager.instance.canLook)
+        {
             LookAround();
         }
-        ApplyBreathingEffect();
     }
 
     void Move()
     {
-        float moveForwardBackward = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-        float moveLeftRight = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        float moveForwardBackward = Input.GetAxis("Vertical") * speed;
+        float moveLeftRight = Input.GetAxis("Horizontal") * speed;
 
         Vector3 move = transform.right * moveLeftRight + transform.forward * moveForwardBackward;
-        transform.Translate(move, Space.World);
+        move *= Time.deltaTime;
+        
+        characterController.Move(move);
+        transform.position = new Vector3(transform.position.x, -4.26f, transform.position.z);
     }
 
     void LookAround()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
         horizontalLookRotation += mouseX;
         verticalLookRotation -= mouseY;
@@ -59,12 +61,13 @@ public class FirstPersonController : MonoBehaviour
         transform.localEulerAngles = new Vector3(0, smoothHorizontalLookRotation, 0);
         playerCamera.localEulerAngles = Vector3.right * smoothVerticalLookRotation;
     }
-
-    void ApplyBreathingEffect()
+    public void UpdateRotationValues(Quaternion targetRotation)
     {
-        float newY = initialCameraY + Mathf.Sin(Time.time * breathingSpeed) * breathingAmplitude;
-        Vector3 cameraPosition = playerCamera.localPosition;
-        cameraPosition.y = newY;
-        playerCamera.localPosition = cameraPosition;
+        Vector3 targetEulerAngles = targetRotation.eulerAngles;
+        horizontalLookRotation = targetEulerAngles.y;
+        verticalLookRotation = targetEulerAngles.x;
+
+        smoothHorizontalLookRotation = horizontalLookRotation;
+        smoothVerticalLookRotation = verticalLookRotation;
     }
 }

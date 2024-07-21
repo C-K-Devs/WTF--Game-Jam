@@ -31,17 +31,28 @@ public class Laptop : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (!isOpen)
+        if (QuestManager.instance.wiresMatched)
         {
-            isOpen = true;
-            StartCoroutine(OpenLaptop());
+            if (!QuestManager.instance.mailChecked){
+                if (!isOpen)
+                {
+                    isOpen = true;
+                    StartCoroutine(OpenLaptop());
+                }
+                QuestManager.instance.canLook = false;
+                QuestManager.instance.canMove = false;
+                passInput.enabled = true;
+                passInput.ActivateInputField();
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else{
+                UIManager.instance.ShowSubtitle("I must follow what mum said...", 5f, true);
+            }
         }
-        QuestManager.instance.canLook = false;
-        QuestManager.instance.canMove = false;
-        QuestManager.instance.player.currentInteractable = null;
-        passInput.enabled = true;
-        passInput.ActivateInputField();
-        Cursor.lockState = CursorLockMode.None;
+        else{
+            UIManager.instance.ShowSubtitle("I need the room to be lit first...", 5f, true);
+        }
+        
     }
 
     private IEnumerator OpenLaptop()
@@ -104,7 +115,6 @@ public class Laptop : MonoBehaviour, IInteractable
     public void LeaveLaptop(){
         QuestManager.instance.canLook = true;
         QuestManager.instance.canMove = true;
-        QuestManager.instance.player.currentInteractable = null;
         passInput.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
     }

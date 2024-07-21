@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class SwipeManager2D : MonoBehaviour
+public class SwipeManager3D : MonoBehaviour
 {
     public Transform puzzleSprite;
     public float swipeThreshold = 50f;
@@ -10,6 +10,7 @@ public class SwipeManager2D : MonoBehaviour
     public float returnSpeed = 1f; // Speed to return to original rotation
 
     private Vector2 startTouchPosition;
+    private Vector2 currentTouchPosition;
     private List<string> swipePattern = new List<string>();
     private List<string> correctPattern = new List<string> { "right", "right", "left" };
     private Quaternion originalRotation;
@@ -17,6 +18,8 @@ public class SwipeManager2D : MonoBehaviour
     private float returnStartTime;
     private float returnDuration = 1f; // Duration to return to original rotation
     private int swipeCount = 0; // Counter for tracking the number of swipes
+    private bool isSwiping = false; // Flag to check if swiping is in progress
+    private RaycastHit hit;
 
     void Start()
     {
@@ -36,9 +39,26 @@ public class SwipeManager2D : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            startTouchPosition = Input.mousePosition;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform == puzzleSprite)
+                {
+                    startTouchPosition = Input.mousePosition;
+                    isSwiping = true;
+                }
+            }
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButton(0) && isSwiping)
+        {
+            currentTouchPosition = Input.mousePosition;
+            float swipeDistance = currentTouchPosition.x - startTouchPosition.x;
+
+            // Update sprite rotation as swipe progresses
+            float rotationAmount = swipeDistance * rotationSpeed * Time.deltaTime;
+            puzzleSprite.Rotate(Vector3.forward, -rotationAmount);
+        }
+        else if (Input.GetMouseButtonUp(0) && isSwiping)
         {
             Vector2 endTouchPosition = Input.mousePosition;
             float swipeDistance = endTouchPosition.x - startTouchPosition.x;
@@ -72,6 +92,8 @@ public class SwipeManager2D : MonoBehaviour
                 isReturning = true;
                 returnStartTime = Time.time;
             }
+
+            isSwiping = false; // Reset swiping flag
         }
     }
 
@@ -88,7 +110,7 @@ public class SwipeManager2D : MonoBehaviour
 
         if (t >= 1f)
         {
-            isReturning = false; // Stop returning once we reach the original rotation
+            isReturning = false;
         }
     }
 
@@ -126,8 +148,8 @@ public class SwipeManager2D : MonoBehaviour
     private void OnPatternComplete()
     {
         Debug.Log("Pattern Complete!");
-        Debug.Log("Locked Opened");
-        gameObject.GetComponent<SwipeManager2D>().enabled = false;
+        Debug.Log("Lock Opened");
+        gameObject.GetComponent<SwipeManager3D>().enabled = false;
         // Implement what happens when the pattern is complete
         // e.g., open a door, show a message, etc.
     }

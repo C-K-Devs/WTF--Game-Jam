@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ public class UIManager : MonoBehaviour
     public TMP_Text subtitle;
     public bool isSubtitleActive = false;
     private Coroutine currentSubtitleCoroutine;
+    public List<GameObject> papers;
+    public GameObject finalPaper;
 
     void Awake()
     {

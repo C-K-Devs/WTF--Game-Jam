@@ -48,11 +48,16 @@ public class QuestManager : MonoBehaviour
     public bool bunchOfKeysCollected = false;
     public bool jumpScared_ClosedDrawer = false;
     public bool masterKeyCollected = false;
+    public bool metalScaleCollected = false;
     public bool doorOpened = false;
     public GameObject mainLight;
 
     public bool canMove = true;
     public bool canLook = true;
+
+    public Dictionary<int, bool> papersCollected = new Dictionary<int, bool>();
+
+    public SpiderJumpScare spiderJumpScare;
 
     void Awake()
     {
@@ -64,19 +69,20 @@ public class QuestManager : MonoBehaviour
     void Start()
     {
         StartQuest(0);
+        
     }
 
     public void StartQuest(int questIndex)
     {
-        if (questIndex > 0){
-            DeactivateInteractables(quests[questIndex - 1]);
-        }
-        
         currentQuest = quests[questIndex].questName;
-        ActivateInteractables(quests[questIndex]);
+        
         if (questIndex == 3)
         {
             StartCoroutine(LookAtFirstInteractable(quests[questIndex].interactables[0].obj.transform));
+            for (int i = 1; i <= 3; i++)
+            {
+                papersCollected.Add(i, false);
+            }
         }
     }
 
@@ -85,17 +91,18 @@ public class QuestManager : MonoBehaviour
         canMove = false;
         canLook = false;
         target.GetComponent<Phone>()?.screen.SetActive(true);
+        target.GetComponent<Phone>().switchedOn = true;
         Transform playerCamera = Camera.main.transform;
-        StartCoroutine(CameraShake(0.3f, 0.3f)); // Duration and magnitude of the shake
+        StartCoroutine(CameraShake(0.3f, 0.3f));
 
         // Wait for the shake to finish
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
 
         Quaternion initialRotation = playerCamera.rotation;
         Quaternion targetRotation = Quaternion.LookRotation(target.position - playerCamera.position);
 
         float elapsedTime = 0f;
-        float duration = 0.5f;
+        float duration = 0.3f;
 
         while (elapsedTime < duration)
         {
@@ -106,12 +113,12 @@ public class QuestManager : MonoBehaviour
 
         playerCamera.rotation = targetRotation;
 
-        // player.GetComponent<FirstPersonController>().UpdateRotationValues(targetRotation);
+        player.GetComponent<FirstPersonController>().UpdateRotationValues(targetRotation);
         canMove = true;
         canLook = true;
     }
 
-    private IEnumerator CameraShake(float duration, float magnitude)
+    public IEnumerator CameraShake(float duration, float magnitude)
     {
         Transform playerCamera = Camera.main.transform;
         Vector3 originalPosition = playerCamera.localPosition;

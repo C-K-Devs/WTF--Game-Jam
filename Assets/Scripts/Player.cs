@@ -64,7 +64,18 @@ public class Player : MonoBehaviour
                     }
                     break;
                 case QuestName.Quest5:
+                    if (currentInteractable != null)
+                    {
+                        currentInteractable.Interact();
+                        currentInteractable = null;
+                    }
                     break;
+            }
+        }
+        else if (Input.GetKey(KeyCode.F))
+        {
+            if (currentInteractable is CircuitBox circuitBox){
+                circuitBox.UnlockScrews();
             }
         }
     }
@@ -78,24 +89,19 @@ public class Player : MonoBehaviour
         {
             if (hit.collider.TryGetComponent<IInteractable>(out IInteractable interactable))
             {
-                Quest currentQuest = QuestManager.instance.quests.Find(q => q.questName == QuestManager.instance.currentQuest);
-                Interactables interactableEntry = currentQuest.interactables.Find(i => i.obj == hit.collider.gameObject);
-
-                if (interactableEntry != null && interactableEntry.isInteractable)
+                if (currentInteractable != interactable)
                 {
-                    if (currentInteractable != interactable)
-                    {
-                        currentInteractable = interactable;
-                        UIManager.instance.ShowSubtitle("PRESS 'F' TO INTERACT", 99999f, false);
-                    }
+                    currentInteractable = interactable;
+                    UIManager.instance.ShowSubtitle("PRESS 'F' TO INTERACT", 99999f, false);
                 }
-                else
+
+            }
+            else if (hit.collider.transform.parent.TryGetComponent<IInteractable>(out IInteractable parentInteractable))
+            {
+                if (currentInteractable != parentInteractable)
                 {
-                    if (currentInteractable != null)
-                    {
-                        currentInteractable = null;
-                        UIManager.instance.StopShowSubtitle();
-                    }
+                    currentInteractable = parentInteractable;
+                    UIManager.instance.ShowSubtitle("PRESS 'F' TO INTERACT", 99999f, false);
                 }
             }
             else

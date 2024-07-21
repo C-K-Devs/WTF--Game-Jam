@@ -9,12 +9,16 @@ public class Mattress : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (IsPlayerInCorner())
-        {
-            QuestManager.instance.cupboardKeyFound = true;
-        }
-        else{
-            UIManager.instance.ShowSubtitle("Ahh... There's nothing under this corner.", 5f, true);
+        if (QuestManager.instance.mailChecked && !QuestManager.instance.cupboardKeyFound){
+            if (IsPlayerInCorner())
+            {
+                QuestManager.instance.cupboardKeyFound = true;
+                UIManager.instance.ShowSubtitle("Haash! Got the key...", 5f, true);
+            }
+            else
+            {
+                UIManager.instance.ShowSubtitle("Ahh... There's nothing under this corner.", 5f, true);
+            }
         }
     }
 

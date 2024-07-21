@@ -5,7 +5,6 @@ using UnityEngine;
 public enum DrawerType{
     Empty,
     JumpScare,
-    Puzzle
 }
 public class Drawer : MonoBehaviour, IInteractable
 {
@@ -27,15 +26,12 @@ public class Drawer : MonoBehaviour, IInteractable
                 QuestManager.instance.jumpScared_OpenDrawer = true;
             }
         }
-        if (drawerType == DrawerType.Puzzle){
-            QuestManager.instance.screwDriverFound = true;
-        }
     }
 
     private IEnumerator OpenAndCloseDrawer()
     {
         print("Opening or Closing");
-        Vector3 forwardPosition = initialPosition + transform.forward * moveDistance;
+        Vector3 forwardPosition = initialPosition + transform.right * -moveDistance;
         if (!opened)
         {
             opened = true;
