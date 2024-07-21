@@ -13,12 +13,13 @@ public class Phone : MonoBehaviour, IInteractable
                 if (switchedOn)
                 {
                     QuestManager.instance.phoneDead = true;
+                    UIManager.instance.ShowSubtitle("Shit, the phone battery is dead.", 5f, true); 
                     screen.SetActive(false);
                     switchedOn = false;
                 }
                 else
                 {
-                    UIManager.instance.ShowSubtitle("I need to get this thing charged...", 5f, true);
+                    UIManager.instance.ShowSubtitle("I should charge the phone first.", 5f, true);
                 }
             }
             

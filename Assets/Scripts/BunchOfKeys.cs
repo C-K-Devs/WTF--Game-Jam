@@ -11,6 +11,7 @@ public class BunchOfKeys : MonoBehaviour, IInteractable
             if (QuestManager.instance.safeUnlocked)
             {
                 QuestManager.instance.bunchOfKeysCollected = true;
+                UIManager.instance.ShowSubtitle("Found my keys.", 5f, true);
             }
         }
     }

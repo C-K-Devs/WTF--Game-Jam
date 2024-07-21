@@ -19,8 +19,10 @@ public class Safe : MonoBehaviour, IInteractable
     public void Interact(){
         if (QuestManager.instance.phoneConnectedButFailed){
             Debug.Log("Charger connected");
+            UIManager.instance.ShowSubtitle("I think I wrote its password on a piece of paper.", 5f, true); 
             if (QuestManager.instance.threePapersCollected){
-                Debug.Log("Papers collected and solved");
+                
+                 Debug.Log("Papers collected and solved");
                 // QuestManager.instance.canLook = false;
                 // QuestManager.instance.canMove = false;
                 // radialLock.SetActive(true);
@@ -29,14 +31,13 @@ public class Safe : MonoBehaviour, IInteractable
                     Debug.Log("was not open");
                     isOpen = true;
                     StartCoroutine(OpenSafeDoor());
+                     
                 }
             }
-            else{
-                UIManager.instance.ShowSubtitle("Interesting... What could be the pattern?", 5f, true);
-            }
+    
         }
         else{
-            UIManager.instance.ShowSubtitle("I guess I should get my phone charged first...", 5f, true);
+            UIManager.instance.ShowSubtitle("I should charge my phone first.", 5f, true);
         }
     }
 

@@ -11,7 +11,7 @@ public class MainMenuController : MonoBehaviour
     public GameObject settingsPanel;
     public void PlayGame()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("MainGameScene");
     }
 
     public void OpenSettings()

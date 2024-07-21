@@ -50,6 +50,7 @@ public class SpiderJumpScare : MonoBehaviour
         transform.position = cameraTransform.position;
         transform.localScale = endScale;
 
+        
         StartCoroutine(QuestManager.instance.CameraShake(shakeDuration, shakeMagnitude));
 
         yield return new WaitForSeconds(shakeDuration);

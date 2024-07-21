@@ -13,11 +13,11 @@ public class Mattress : MonoBehaviour, IInteractable
             if (IsPlayerInCorner())
             {
                 QuestManager.instance.cupboardKeyFound = true;
-                UIManager.instance.ShowSubtitle("Haash! Got the key...", 5f, true);
+                UIManager.instance.ShowSubtitle("Ahh, here it is.", 5f, true);
             }
             else
             {
-                UIManager.instance.ShowSubtitle("Ahh... There's nothing under this corner.", 5f, true);
+                UIManager.instance.ShowSubtitle("There is nothing in this corner.", 5f, true);
             }
         }
     }

@@ -13,6 +13,8 @@ public class LightFlicker : MonoBehaviour
     {
         lightComp = GetComponent<Light>();
         StartCoroutine(FlickerRoutine());
+        UIManager.instance.ShowSubtitle("Better than nothing.", 5f, true); 
+        UIManager.instance.ShowSubtitle("I remember Mummy has left me a note in my Laptop.", 5f, true);
     }
 
     private IEnumerator FlickerRoutine()

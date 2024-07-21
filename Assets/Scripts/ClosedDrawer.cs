@@ -26,13 +26,13 @@ public class ClosedDrawer : MonoBehaviour, IInteractable
             {
                 if (!QuestManager.instance.jumpScared_ClosedDrawer)
                 {
-                    UIManager.instance.ShowSubtitle("AAAAAAAAAAAAAAAAA!!!", 5f, true);
+                    UIManager.instance.ShowSubtitle("Aaaaa… Aah Aah Aah…", 5f, true);
                     QuestManager.instance.jumpScared_ClosedDrawer = true;
                 }
             }
         }
         else{
-            UIManager.instance.ShowSubtitle("I require keys for these...", 5f, true);
+            UIManager.instance.ShowSubtitle("It's Locked!", 5f, true);
         }
     }
 

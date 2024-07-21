@@ -68,6 +68,11 @@ public class QuestManager : MonoBehaviour
     }
     void Start()
     {
+        UIManager.instance.ShowSubtitle("This storm is getting intense.", 5f, true);
+        UIManager.instance.ShowSubtitle("Ahh, as expected, a little rain and the power goes out immediately.", 5f, true);
+        UIManager.instance.ShowSubtitle("Let’s check the switches with the help of the torch.", 5f, true);
+        
+
         StartQuest(0);
         
     }
@@ -94,6 +99,7 @@ public class QuestManager : MonoBehaviour
         target.GetComponent<Phone>().switchedOn = true;
         Transform playerCamera = Camera.main.transform;
         StartCoroutine(CameraShake(0.3f, 0.3f));
+        UIManager.instance.ShowSubtitle("Aaaa, the alarm had to ring at this moment only.", 5f, true);
 
         // Wait for the shake to finish
         yield return new WaitForSeconds(0.3f);
@@ -129,7 +135,7 @@ public class QuestManager : MonoBehaviour
         {
             Vector3 shakeOffset = UnityEngine.Random.insideUnitSphere * magnitude;
             playerCamera.localPosition = originalPosition + shakeOffset;
-
+            UIManager.instance.ShowSubtitle("Aaaaa… Aah Aah Aah…", 5f, true); 
             elapsed += Time.deltaTime;
             yield return null;
         }

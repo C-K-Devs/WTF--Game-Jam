@@ -8,7 +8,6 @@ public class Screwdriver : MonoBehaviour, IInteractable
     public void Interact(){
         if (parentDrawer.opened == true){
             QuestManager.instance.screwDriverFound = true;
-            UIManager.instance.ShowSubtitle("Got the screwdriver", 5f, true);
             Destroy(gameObject); 
         }
         else{

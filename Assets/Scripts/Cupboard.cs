@@ -29,18 +29,18 @@ public class Cupboard : MonoBehaviour, IInteractable
                 if (!isOpen)
                 {
                     isOpen = true;
-                    UIManager.instance.ShowSubtitle("Haash... Finally!", 5f, true);
                     StartCoroutine(OpenClosedCupboard());
                 }
             }
             else
             {
-                UIManager.instance.ShowSubtitle("I need to get the keys first...", 5f, true);
+                UIManager.instance.ShowSubtitle("It's Locked!.", 5f, true);
             }
         }
         else{
             if (!isOpen){
                 isOpen = true;
+                
                 StartCoroutine(OpenOpenCupboard());
             }
             else

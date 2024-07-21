@@ -20,6 +20,7 @@ public class Laptop : MonoBehaviour, IInteractable
 
     private void OnEnable()
     {
+        UIManager.instance.ShowSubtitle("That’s why I made a hint for my password.", 5f, true);
         submitButton.onClick.AddListener(CheckPass);
     }
 
@@ -45,12 +46,9 @@ public class Laptop : MonoBehaviour, IInteractable
                 passInput.ActivateInputField();
                 Cursor.lockState = CursorLockMode.None;
             }
-            else{
-                UIManager.instance.ShowSubtitle("I must follow what mum said...", 5f, true);
-            }
         }
         else{
-            UIManager.instance.ShowSubtitle("I need the room to be lit first...", 5f, true);
+            UIManager.instance.ShowSubtitle("I need some light first", 5f, true);
         }
         
     }
@@ -85,6 +83,7 @@ public class Laptop : MonoBehaviour, IInteractable
         {
             note.SetActive(true);
         }
+        UIManager.instance.ShowSubtitle("Mummy said, Don’t forget to make your Bed.", 5f, true);
         QuestManager.instance.mailChecked = true;
         QuestManager.instance.StartQuest(2);
         UIManager.instance.StopShowSubtitle();

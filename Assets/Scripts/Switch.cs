@@ -8,5 +8,6 @@ public class Switch : MonoBehaviour, IInteractable
     public void Interact()
     {
         Debug.Log("Switch" + switchNo + " flipped.");
+        UIManager.instance.ShowSubtitle("The Switches are not working, I think I should find the Circuit box.", 5f, true);
     }
 }

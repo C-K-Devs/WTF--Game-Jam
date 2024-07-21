@@ -20,7 +20,7 @@ public class CircuitBox : MonoBehaviour, IInteractable
         if (!QuestManager.instance.wiresMatched){
             if (!QuestManager.instance.screwDriverFound)
             {
-                UIManager.instance.ShowSubtitle("I would need a screwdriver for this...", 5f, true);
+                UIManager.instance.ShowSubtitle("I need a Screwdriver", 5f, true);
             }
             else{
                 holdTimer = 0f;
@@ -85,7 +85,8 @@ public class CircuitBox : MonoBehaviour, IInteractable
         if (noOfWiresMatched >= 4){
             QuestManager.instance.wiresMatched = true;
             wiresPuzzle.SetActive(false);
-            UIManager.instance.ShowSubtitle("I must check mum's mail...", 5f, true);
+            UIManager.instance.ShowSubtitle("Better than nothing.", 5f, true);
+            UIManager.instance.ShowSubtitle("I remember Mummy has left me a note in my Laptop.", 5f, true);
             QuestManager.instance.player.torch.SetActive(false);
             QuestManager.instance.mainLight.SetActive(true);
             QuestManager.instance.StartQuest(1);

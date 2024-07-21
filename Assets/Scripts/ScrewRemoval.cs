@@ -27,5 +27,7 @@ public class ScrewRemoval : MonoBehaviour
         Debug.Log("All screws removed. Opening circuit box.");
         circuitBoxPanel.SetActive(true); // Activate the wire puzzle UI
         Cursor.lockState = CursorLockMode.None;
+        UIManager.instance.ShowSubtitle("Hopefully, the light returns with this.", 5f, true);
+        
     }
 }

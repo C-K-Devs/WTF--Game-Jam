@@ -24,7 +24,7 @@ public class EscapeDoor : MonoBehaviour, IInteractable
                 // Hold to remove screw in order
                 if (!isOpen){
                     isOpen = true;
-                    UIManager.instance.ShowSubtitle("FINALLY! I AM OUT.", 5f, true);
+                    UIManager.instance.ShowSubtitle("Yeyeye, finally out.", 5f, true);
                     StartCoroutine(OpenDoor());
                 }
             }

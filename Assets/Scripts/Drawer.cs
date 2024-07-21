@@ -22,10 +22,11 @@ public class Drawer : MonoBehaviour, IInteractable
         StartCoroutine(OpenAndCloseDrawer());
         if (drawerType == DrawerType.JumpScare){
             if (!QuestManager.instance.jumpScared_OpenDrawer){
-                UIManager.instance.ShowSubtitle("AAAAAAAAAAAAAAAAA!!!", 5f, true);
+                UIManager.instance.ShowSubtitle("Aaaaa… Aah Aah Aah…", 5f, true);
                 QuestManager.instance.jumpScared_OpenDrawer = true;
             }
         }
+
     }
 
     private IEnumerator OpenAndCloseDrawer()
