@@ -26,6 +26,11 @@ public class MainMenuController : MonoBehaviour
         buttonPanel.SetActive(true);
     }
 
+    public void QuitToMainScreen()
+    {
+        SceneManager.LoadScene("MainMenuScene");
+    }
+
     public void QuitGame()
     {
         #if UNITY_EDITOR

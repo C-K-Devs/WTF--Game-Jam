@@ -8,6 +8,7 @@ public class FirstPersonController : MonoBehaviour
     public float speed = 5f;
     public float mouseSensitivity = 100f;
     public Transform playerCamera;
+    public GameObject inGameMenuUI;
 
     private float verticalLookRotation;
     private float horizontalLookRotation;
@@ -15,6 +16,7 @@ public class FirstPersonController : MonoBehaviour
     private float smoothVerticalLookRotation;
     public float rotationSmoothTime = 10;
     private CharacterController characterController;
+    private bool isMenuActive = false;
 
     void Start()
     {
@@ -24,6 +26,16 @@ public class FirstPersonController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ToggleInGameMenu();
+        }
+
+        if (isMenuActive)
+        {
+            return;  // Prevent movement and looking around when the menu is active
+        }
+
         if (QuestManager.instance.canMove)
         {
             Move();
@@ -69,5 +81,21 @@ public class FirstPersonController : MonoBehaviour
 
         smoothHorizontalLookRotation = horizontalLookRotation;
         smoothVerticalLookRotation = verticalLookRotation;
+    }
+
+    void ToggleInGameMenu()
+    {
+        isMenuActive = !isMenuActive;
+        inGameMenuUI.SetActive(isMenuActive);
+        Cursor.lockState = isMenuActive ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = isMenuActive;
+    }
+
+    public void CloseInGameMenu()
+    {
+        isMenuActive = false;
+        inGameMenuUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
