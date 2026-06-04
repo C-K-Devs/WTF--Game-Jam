@@ -1,4 +1,4 @@
-# WTF--Game-Jam
+#House Escape: WTF--Game-Jam
 
 ### Contributors:
 - **Himank Agarwal**
